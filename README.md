@@ -1,4 +1,4 @@
-# Audio Bridge
+﻿# Audio Bridge
 
 ### 把你的电脑变成蓝牙音箱
 
@@ -44,3 +44,21 @@ Windows 10 之后系统其实已经支持"让电脑接收手机传来的蓝牙�
 - Windows 11 22H2 或更高版本
 - 一台支持蓝牙的电脑（自带或买个蓝牙适配器都行）
 - 装完会在桌面和开始菜单生成快捷方式，可选是否开机自启
+
+---
+
+### 关于 svchost.exe：你可能注意到的一件事
+
+如果你用 **SteelSeries Sonar**、**Windows 音量合成器**（按 Win+R 输入 `sndvol` 打开）或者其他按应用分类音频的工具，你可能会发现：蓝牙音频出现在 **svchost.exe** 名下，而不是 "Audio Bridge"。
+
+**这不是 Bug**——Audio Bridge 只负责"建立连接和管理设备"，真正接收蓝牙音频流、解码、输出到扬声器的，是 Windows 系统内部的蓝牙音频服务（运行在 svchost.exe 进程里）。这是 Windows 平台所有蓝牙接收类应用的共同特点，目前在应用层面没法改。
+
+#### Sonar 用户怎么用
+
+虽然不能把它在 Sonar 里改名为 Audio Bridge 或拖到指定轨道，但你可以这样让 Sonar 调音生效：
+
+1. 打开 Windows 设置 → 系统 → 声音
+2. 把默认输出设备选为 **SteelSeries Sonar - 媒体**（或你想让蓝牙音频走的 Sonar 轨道对应的那个虚拟设备）
+3. 手机连接后播放音乐 → 音频就会自动从 Sonar 的虚拟设备出来，你的 EQ、空间音频、预设全部生效
+
+或者直接用 Windows 自带的音量合成器（Win+R → `sndvol`）调节，svchost 的音量在那里可以正常控制。
